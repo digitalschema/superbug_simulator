@@ -48,7 +48,7 @@ Open your web browser and go to http://localhost:5000 to start interacting with 
 Optional: Setting Up with Nginx
 If you want to make the app accessible via the default HTTP port (80), you can set up an Nginx configuration to forward traffic from port 80 to port 5000.
 
-Now, users can access the app via [http://your_domain_or_ip](https://smilecoach2.seedsofempowerment.org)
+Now, users can access the app via[ [http://your_domain_or_ip](https://smilecoach2.seedsofempowerment.org)](https://smilecoach2.seedsofempowerment.org/)
 
 Directory Structure
 app.py: Main Flask application file, containing the routes and logic for the web server.

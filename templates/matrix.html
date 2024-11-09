@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacteria-Antibiotic Interaction Matrix</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <h1>Bacteria-Antibiotic Interactions</h1>
+                </div>
+                <div class="nav-right">
+                    <a href="/" class="matrix-link">← Back to Simulator</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="matrix-container">
+        <div class="matrix-description">
+            <p>This matrix shows the interaction strength between different bacteria and antibiotics. 
+               The color intensity indicates the level of resistance development observed in the simulation.</p>
+        </div>
+
+        <div id="interaction-matrix"></div>
+        
+        <!-- Legend with Graphics for Clarity -->
+        <div class="matrix-legend">
+            <h3>Legend</h3>
+            <div class="legend-item high">
+                <span class="legend-color" style="background-color: #ffebee;"></span>
+                <span>High interaction - Very dynamic simulation (🔥 Strong resistance development)</span>
+            </div>
+            <div class="legend-item moderate">
+                <span class="legend-color" style="background-color: #fff3e0;"></span>
+                <span>Moderate interaction - Some visible changes (⚡ Moderate resistance)</span>
+            </div>
+            <div class="legend-item low">
+                <span class="legend-color" style="background-color: #f5f5f5;"></span>
+                <span>Low interaction - Minimal simulation effect (− Limited or no interaction)</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='matrix.js') }}"></script>
+</body>
+</html>

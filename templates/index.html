@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Superbug Simulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <h1>Enhanced Superbug Simulator</h1>
+                </div>
+                <div class="nav-right">
+                    <a href="/matrix" class="matrix-link">View Interaction Matrix →</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="simulation-container">
+        <div id="main-simulation" class="landscape"></div>
+    </div>
+    
+    <div class="bottom-windows">
+        <div id="control-panel">
+            <h2>Control Panel</h2>
+
+            <!-- Bacteria Selection -->
+            <label for="bacteria-dropdown">Select Bacteria:</label>
+            <select id="bacteria-dropdown">
+                <option value="Escherichia coli">Escherichia coli</option>
+                <option value="Staphylococcus aureus">Staphylococcus aureus</option>
+                <option value="Klebsiella pneumoniae">Klebsiella pneumoniae</option>
+                <option value="Pseudomonas aeruginosa">Pseudomonas aeruginosa</option>
+                <option value="Clostridium difficile">Clostridium difficile</option>
+                <option value="Mycobacterium tuberculosis">Mycobacterium tuberculosis</option>
+            </select>
+
+            <!-- Primary Antibiotic Selection -->
+            <label for="primary-antibiotic">Primary Antibiotic:</label>
+            <select id="primary-antibiotic">
+                <option value="Vancomycin">Vancomycin</option>
+                <option value="Ciprofloxacin">Ciprofloxacin</option>
+                <option value="Meropenem">Meropenem</option>
+                <option value="Daptomycin">Daptomycin</option>
+                <option value="Linezolid">Linezolid</option>
+                <option value="Rifampicin">Rifampicin</option>
+            </select>
+
+            <!-- Secondary Antibiotic Selection -->
+            <label for="secondary-antibiotic">Secondary Antibiotic (Optional):</label>
+            <select id="secondary-antibiotic">
+                <option value="none">None</option>
+                <option value="Vancomycin">Vancomycin</option>
+                <option value="Ciprofloxacin">Ciprofloxacin</option>
+                <option value="Meropenem">Meropenem</option>
+                <option value="Daptomycin">Daptomycin</option>
+                <option value="Linezolid">Linezolid</option>
+                <option value="Rifampicin">Rifampicin</option>
+            </select>
+
+            <!-- Environmental Controls -->
+            <label for="temperature">Temperature (°C):</label>
+            <input type="range" id="temperature" min="20" max="40" step="0.5" value="37">
+            <span id="temperature-display">37°C</span>
+
+            <label for="ph-level">pH Level:</label>
+            <input type="range" id="ph-level" min="5" max="9" step="0.1" value="7">
+            <span id="ph-display">7.0</span>
+
+            <!-- Growth and Mutation Settings -->
+            <label for="growth-rate">Growth Rate:</label>
+            <input type="range" id="growth-rate" min="0.1" max="2" step="0.1" value="1">
+            <span id="growth-rate-display">1x</span>
+
+            <label for="mutation-rate">Mutation Rate:</label>
+            <input type="range" id="mutation-rate" min="0.01" max="0.8" step="0.01" value="0.1">
+            <span id="mutation-rate-display">0.1 mutations/sec</span>
+
+            <!-- Antibiotic Dosage Controls -->
+            <label for="primary-dosage">Primary Antibiotic Dosage:</label>
+            <input type="range" id="primary-dosage" min="1" max="100" step="1" value="40">
+            <span id="primary-dosage-display">40%</span>
+
+            <label for="secondary-dosage">Secondary Antibiotic Dosage:</label>
+            <input type="range" id="secondary-dosage" min="1" max="100" step="1" value="40">
+            <span id="secondary-dosage-display">40%</span>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button id="start-button">Start Simulation</button>
+                <button id="pause-button">Pause</button>
+                <button id="reset-button">Reset</button>
+            </div>
+        </div>
+
+        <div class="analytics-windows">
+            <div class="analytics-window" id="resistance-level-distribution">
+                <h3>Resistance Level Distribution</h3>
+                <div class="window-description">
+                    Shows how resistance levels are distributed across the bacterial population.
+                </div>
+                <div id="histogram"></div>
+            </div>
+
+            <div class="analytics-window" id="population-growth">
+                <h3>Population Growth Over Time</h3>
+                <div class="window-description">
+                    Tracks total bacterial population and growth rate over time.
+                </div>
+                <div id="population-graph"></div>
+            </div>
+
+            <div class="analytics-window" id="resistance-mechanisms">
+                <h3>Resistance Mechanisms</h3>
+                <div class="window-description">
+                    Lists active resistance mechanisms detected in the population.
+                </div>
+                <div id="mechanism-list"></div>
+            </div>
+
+            <div class="analytics-window" id="environmental-impact">
+                <h3>Environmental Impact</h3>
+                <div class="window-description">
+                    Shows how temperature and pH affect bacterial growth.
+                </div>
+                <div id="environmental-visualization"></div>
+            </div>
+
+            <div class="analytics-window" id="frequency-heatmap">
+                <h3>Frequency Heat Map</h3>
+                <div class="window-description">
+                    Heat map displaying bacterial density across the petri dish.
+                </div>
+                <div id="heatmap-visualization"></div>
+            </div>
+
+            <div class="analytics-window" id="antibiotic-gradient">
+                <h3>Antibiotic Gradient Visualization</h3>
+                <div class="window-description">
+                    Shows the distribution of antibiotic concentration across the dish.
+                </div>
+                <div id="gradient-visualization"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
